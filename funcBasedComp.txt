@@ -1,0 +1,39 @@
+
+.tsx = JSX TypeScript
+
+1.  Create a component: export const Header = () => (                           
+                        <div>
+                            <a href="./">Q and A</a>
+                            <input type="text" placeholder="Search..." />
+                            <a href="./signin">
+                            <UserIcon/>
+                            <span>Sign In</span>
+                            </a>
+                        </div>
+                        );
+
+
+*.  => arrow fuinction, parameters go inside (), executable JSX code follows the "fat" arrow
+    export = to allow for use in other files
+    import = to import the export statement
+
+    export const funcWithReturnType = (): ReturnType[] => {};
+
+2.  Open the App.tsx
+
+3.  import {Header} from './Header';
+
+4.  Add a component under the return statement for the React App component - <Header />
+
+? used in an interface makes the property optional: interface Props {
+                                                        data: dataType;
+                                                        showContent?: boolean;
+                                                    }
+
+functionComponent.defaultProps = {
+    parameterName: true, // This is the default value for function interface property
+}
+
+
+
+

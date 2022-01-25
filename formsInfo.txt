@@ -1,0 +1,93 @@
+FORMS
+
+CONTROLLED COMPONENTS
+
+Have their value syncronised with the value in React.
+
+Add useSearchParams to the imports:
+// Navigation
+import { Link, useSearchParams } from "react-router-dom";
+
+Then create the ability to get the serch prameters and the search criteria from these params:
+// Get search criteria
+  const [searchParms] = useSearchParams();
+  const criteria = searchParms.get('criteria') || '';
+  // State to store search value
+  const [search, setSearch] = React.useState(criteria);
+
+Use the "search" variable from the above to dtive the valye attribute:
+            <input
+                type="text"
+                placeholder="Search..."
+                value={search}
+                onChange={handleSearchInputChange}
+                css={css`..........
+
+Create a new search handler to listen for changes:
+  const handleSearchInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearch(e.currentTarget.value);
+  };
+
+Then wrap the imput with a form element:
+<form onSubmit={handleSubmit}>
+  <input....
+  />
+</form>
+
+
+Add a submit handler function:
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log(search);
+  };
+
+Run the app, type in the input, F12, check the console for submitted criteria.
+
+
+REACT HOOK FORM - Library
+
+Install by opening the terminal and entering:
+> npm install react-hook-form
+
+The react-hook-form library removes the need to declare search states as it handles this for us. 
+
+Add the name property to the input:
+<input>
+  name="search"
+  ...
+  defaultValue={criteria}
+</input>
+
+Add:
+// React hook form
+import { useForm } from "react-hook-form";
+
+Add a type that will represent inputs:
+type FormData = {
+  search: string;
+};
+
+Destructure the register function from react hook form and set the default value:
+  const { register } = useForm<FormData>({
+    defaultValues: {
+      search: "",
+    },
+  });
+
+Set the name of the element to register the function and the options
+register("search", { required: true });
+
+Use the register function on the element named above:
+<input>
+  {...register("search", {
+    required: {
+      value: true,
+      message: "An entry is required!",
+    },
+  })}
+  name="search"
+  ...
+  defaultValue={criteria}
+</input>
+
+

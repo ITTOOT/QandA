@@ -1,0 +1,38 @@
+
+For large pages where the javascript wants to be loaded on demand, "lazy loading" is used.
+
+Add the following import as the last import in App.tsx:
+// Lazy routes - must be the last import
+const Page_1 = React.lazy(() => import('./page1'));
+
+This lets us render a dynamic import that returns a promise, that is resolved after it is fetched.l
+
+Wrap the page route with the "suspense" component:
+<Route
+    path="page1"
+    element={
+        <React.Suspense
+        fallback={
+            <div
+            css={css`
+                margin-top: 100px;
+                text-align: center;
+            `}
+            >
+            Loading...
+            </div>
+        }
+        >
+        {" "}
+        <Page_1 />{" "}
+        </React.Suspense>
+    }
+/>
+
+SuspenseFallback allows for the rendering of a component while the page is being loaded.
+
+To check press F12 open the > Network tab and check that the additional javaScript has been downloaded.
+
+
+
+

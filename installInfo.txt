@@ -1,0 +1,40 @@
+Open terminal on same level as backend folder
+crtl+shift+' = open terminal
+crtl+shift+5 = split terminal
+crtl+shift+Y = close terminal
+crtl+c = close app
+
+npx create-react-app frontend --template typescript
+
+Test the app
+1.  VS Code is easier to use for this frontend Code
+2.  > cd frontend
+3.  > npm start
+4.  App web page opens from app.tsx
+
+Linter
+1.  ESlint - install
+2.  https://eslint.org/docs/rules/
+3.  Create file - eslint.json
+4.  {
+    "extends": "react-app",
+    "rules":{
+    "no-debugger":"warn"
+    }
+    }
+
+Prettier
+1.  Open terminal and cd frontend
+2.  > npm install prettier --save-dev
+3.  > npm install eslint-config-prettier eslint-plugin-prettier --save-dev
+
+- The above disables ESlint rules that conflict with prettier
+
+4.  Create prettierrc.json to add rules to prettier
+5.  Install prettier - code formatter
+6.  Preferances - settings
+7.  Default Formeatter = esbnp.prettier-vscode
+8.  Format on save = Yes
+
+
+

@@ -1,0 +1,147 @@
+
+Use React Router to impliment client side pages and the routes between them.
+
+> npm install react-router-dom
+
+To update:
+> npm install react-router-dom@next
+
+React Router has a peer dependancy on the history package, to install:
+> npm install history
+
+To address all issues (including breaking changes), run:
+> npm audit fix --force
+
+HOOKS
+useParams = hook to give access to route parameters
+useSearchParams = hook to give access to query parameters
+
+DECLARING ROUTES
+
+BrowserRouter = Top level component that performs navigation between pages.
+Routes = Deciodes on the route to be rendered for the current browser location. 
+Route = Path to pages.
+
+In the App.tsx import:
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Page1Funct } from './page1';
+import { Page2Funct } from './page2';
+import { Page3Funct } from './page3';
+import { NotFoundPage } from "./notFoundPage";
+
+Add the Routes and Route components after the Header component:
+<Routes>
+    <Route path="" element={<HomePage />} />
+    <Route path="page1" element={<Page1Funct />} />
+    <Route path="page2" element={<Page2Funct />} />
+    <Route path="page3" element={<Page3Funct />} />
+    <Route path="*" element={<NotFoundPage />} />
+</Routes>
+
+Add the BrouserRouter component to contain the JSX return value:
+//function App() {
+const App: React.FC = () => {
+  return (
+    <BrowserRouter>
+        // JSX code goes witin this container...
+    </BrowserRouter>
+
+
+CREATE A PAGE
+To cteate a basic page add a new newPage.tsx and enter the following:
+
+import React from "react";
+import { Page } from "./page";
+
+// Page 1
+export const Page1Funct = () => {
+  return <Page title="Page 1">{null}</Page>;
+};
+
+* {null} is used because thois is an empty page, also return the page or an error will occur.
+
+
+NAVIGATION LINKs
+Declarativly navigate
+
+Add to App.tsx:
+// Navigation
+import { Link } from "react-router-dom";
+
+ <Link
+    to="./"
+    css={css`
+        font-size: fixed;
+        font-weight: bold;
+        color: ${grey1};
+        text-decoration: none;
+    `}
+    >
+    LINK TEXT GOES HERE!
+</Link>
+
+
+TESTING
+
+Open the developer tools in the browser.
+
+> Network
+> No network requests are yet made*
+
+* All navigation happens in the browser, with no server requests for better performance.
+
+
+NAVIGATION PROGRAMMATICALLY
+
+Add to the home/index page:
+// Navigation
+import { useNavigate } from "react-router-dom";
+
+Add the navigation hook immediatly before any/all function/s to control navigation:
+const navigate = useNavigate();
+
+Add the navigate variable and enter the parameter for the location to navigate to, witin the function:
+navigate('page1');
+
+
+ROUTE PARAMETERS
+
+Route parameters require a : before the parameter name, whe added to the Route component, eg:
+<Route path="page1/:Id" element={<Page1 />} />
+
+Then add the useParams to the page:
+import { useParams } from "react-router-dom";
+
+And use the parameter within the function:
+const { Id } = useParams();
+
+We can test by outputtin the ID:
+return <Page>Page1 {Id}</Page>;
+
+Import link to the page:
+import { Link } from "react-router-dom";
+
+Wrap a Link component around the data text in the JSX for the page to navigate FROM:
+<Link
+    css={css`
+    text-decoration: none;
+    color: ${colour1};
+    `}
+    to={`/page1/${data.Id}`}
+>
+    {data.theTextDataForTheLink}
+</Link>
+
+
+QUERY PARAMETERS
+
+Allow additional parameters to be passed to the path:
+./search?criteria=typescript
+parameter = criteria
+vslue = typescript
+
+
+
+
+
+

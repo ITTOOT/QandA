@@ -1,0 +1,64 @@
+In the frontend folder:
+> npm install @emotion/react @emotion/styled
+
+Extensions:
+vscode-styled-components
+
+Add to top of page:
+/** @jsxImportSource @emotion/react */
+
+Without this the process will error out!
+
+Then import emotion and transform to JSX:
+import {css} from '@emotion/react';
+
+*************************Add to the top of the page******************************
+/** @jsxImportSource @emotion/react */
+import { css } from "@emotion/react";
+*********************************************************************************
+
+Remove:
+className="styles.container"
+
+From here we can use "tagged template literals (``)" such as:
+        
+        <div css={css`
+                font-family: "Sego UI", "Helvetica Neue", sans-serif;
+                font-size: 16px;
+                color: #5c5a5a;
+            `}
+            >
+        </div>
+
+Then create a styles.ts to contain the style variables.
+
+Then use emotion tags ${xxxx} in the page:
+
+    <div css={css`
+            font-family: ${fontFamily};
+            font-size: ${fontSize};
+            color: ${grey2};
+        `}
+        >
+    </div>
+
+During the build process emotion transforms styles into CSS...
+
+To style CSS:
+
+        css={css`
+            position: fixed;
+            box-sizing: border-box;
+            top: 0;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px;
+            background-color: #fff;
+            border-bottom: 1px solid ${grey5};
+            box-shadow: 0 3px 7px 0 rgba(110, 112, 114, 0.21);
+            `}
+
+
+
